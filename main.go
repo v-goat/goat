@@ -1,11 +1,15 @@
 package main
 
-import "log"
+import (
+	"antgo.io/goat/lib"
+	"antgo.io/goat/routes"
+)
 
 func init() {
-	log.New()
+	lib.GetConfigs()
+	lib.LogBegin()
 }
 
 func main() {
-
+	routes.New().Run(":3333")
 }

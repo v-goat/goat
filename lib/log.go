@@ -1,4 +1,4 @@
-package libs
+package lib
 
 import (
 	"fmt"
@@ -20,8 +20,7 @@ var Error *log.Logger
 var Warn *log.Logger
 var Log *log.Logger
 
-func New() {
-	fmt.Println(colour("[success]", green))
+func LogBegin() {
 	if Conf.Debug {
 		Debug = log.New(os.Stdout, colour("[debug]", magenta), log.LstdFlags|log.Lshortfile)
 		Success = log.New(os.Stdout, colour("[success]", green), log.LstdFlags|log.Lshortfile)
@@ -30,22 +29,22 @@ func New() {
 		Log = log.New(os.Stdout, colour("[log]", blue), log.LstdFlags|log.Lshortfile)
 		return
 	}
-	debugLogFile, err := os.Create("./debug.log")
+	debugLogFile, err := os.Create("./logs/debug.log")
 	if err != nil {
 		log.Fatalln("create debug.log file error !")
 	}
 	defer debugLogFile.Close()
-	errorLogFile, err := os.Create("./error.log")
+	errorLogFile, err := os.Create("./logs/error.log")
 	if err != nil {
 		log.Fatalln("create error.log error !")
 	}
 	defer errorLogFile.Close()
-	warnLogFile, err := os.Create("./warn.log")
+	warnLogFile, err := os.Create("./logs/warn.log")
 	if err != nil {
 		log.Fatalln("create warn.log file error !")
 	}
 	defer warnLogFile.Close()
-	defaultLogFile, err := os.Create("./do.log")
+	defaultLogFile, err := os.Create("./logs/do.log")
 	if err != nil {
 		log.Fatalln("create do.log file error !")
 	}

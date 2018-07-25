@@ -1,0 +1,10 @@
+{
+    "debug": true,
+    "domain": "http://localhost:5000",
+    "port": ":5000",
+    "db_host": "localhost",
+    "db_port": "5432",
+    "db_name": "wholesale",
+    "db_user": "root",
+    "db_password": "root"
+}
