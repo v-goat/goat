@@ -1,43 +1,33 @@
 package app
 
 import (
-	"encoding/json"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
 type vgoat = gin.Context
 
-type response struct {
+type response = gin.H
+
+type responseData struct {
 	Code int
 	Msg  string
-	w    http.ResponseWriter
 	Data interface{}
 }
 
-func (r *response) Invalide(w http.ResponseWriter, v interface{}) {
-
-	w.Header().Set("Content-type", "application/json")
-	w.WriteHeader(401)
-	r.Code = 10000
-	r.Data = v
-	json.NewEncoder(w).Encode(r)
-	return
+// Success 正确响应
+func Success(v *vgoat, data interface{}) {
+	res := &gin.H{"Code": 10000, "Data": data}
+	v.JSON(200, res)
 }
 
-func (r *response) Success(w http.ResponseWriter, v interface{}) {
-	w.Header().Set("Content-type", "application/json")
-	r.Code = 10000
-	r.Data = v
-	json.NewEncoder(w).Encode(r)
-	return
+// Error 错误响应
+func Error(v *vgoat, data interface{}) {
+	res := &gin.H{"Code": 40000, "Data": data}
+	v.JSON(200, res)
 }
 
-func (r *response) Error(w http.ResponseWriter, v interface{}) {
-	w.Header().Set("Content-type", "application/json")
-	r.Code = 10000
-	r.Data = v
-	json.NewEncoder(w).Encode(r)
-	return
+// View 渲染视图
+func View(v *vgoat, name string, data interface{}) {
+	res := &gin.H{"Code": 40000, "Data": data}
+	v.HTML(200, name, res)
 }

@@ -9,7 +9,9 @@ var Route *gin.Engine
 
 // New 开始路由
 func New() *gin.Engine {
-	Route = gin.New()
+	gin.SetMode(gin.ReleaseMode)
+	Route = gin.Default()
+	Route.LoadHTMLGlob("public/themes/*")
 	AppRoute()
 	AdminRoute()
 	return Route

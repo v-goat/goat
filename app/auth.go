@@ -1,15 +1,23 @@
 package app
 
-import (
-	"github.com/gin-gonic/gin"
-)
+import "antgo.io/goat/lib"
 
-// DoSignUp 注册
+//SignUp 注册页面
+func SignUp(v *vgoat) {
+	version := lib.Conf.Version
+	res := map[string]string{"message": "pong", "version": version}
+	View(v, "test.html", res)
+}
+
+// DoSignUp 注册处理
 func DoSignUp(v *vgoat) {
-	v.JSON(200, &gin.H{"message": "pong"})
+	version := lib.Conf.Version
+	res := map[string]string{"message": "pong", "version": version}
+	Success(v, res)
 }
 
 // DoSignIn 登录
 func DoSignIn(v *vgoat) {
-	v.JSON(200, &gin.H{})
+	res := map[string]string{"message": "pong"}
+	Success(v, res)
 }
